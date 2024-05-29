@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Escape Room Builder</title>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#properties div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#properties label {
+    margin-right: 10px;
+}
+
+#properties input {
+    flex-grow: 1;
+}
+
+#explorer button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+#menu-bar {
+    background-color: #f0f0f0;
+    padding: 10px;
+    display: flex;
+}
+
+#menu-bar button {
+    margin-right: 10px;
+}
+
+#left-panel, #right-panel {
+    background-color: #f5f0f0;
+    padding: 10px;
+    width: 20%;
+}
+
+#explorer, #properties {
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 200px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    float: right;
+}
+
+#canvas {
+    border: 1px solid #000;
+}
+    </style>
+</head>
+<body>
+    <div id="menu-bar">
+        <button id="play">Play Test</button>
+        <button id="stop">Stop Test</button>
+        <button id="save">Save</button>
+        <button id="import">Import</button>
+        <button id="undoid">Undo</button>
+        <button id="redoid">Redo</button>
+        <button id="newblockid">Create Block</button>
+        <button id="deleteblockid">Delete Block</button>
+        <!--
+        <button>Insert Image</button>
+        <button>Scale</button>
+        <button>Move</button>
+        <button>Rotate</button> 
+        -->
+    </div>
+
+    <div id="left-panel">
+        <button>Add Click Detector</button>
+    </div>
+
+    <div id="right-panel">
+        <p>Explorer</p>
+        <div id="explorer" style="overflow-y: scroll;">
+        </div>
+        <p>Properties</p>
+        <div id="properties" style="overflow-y: scroll;">
+        </div>
+    </div>
+    
+    <div class="container">
+        <canvas id="canvas" width="800" height="600"></canvas>
+    </div>
+
+    <div id="Editor">
+        <p>General Script</p>
+        <pre id = "textarea" contenteditable>
+            1. Type ur code in js
+            2. Choose sprite to save to
+            3. Choose sprite to load script from
+        </pre>
+
+        <button id="saveto">Save To</button>
+        <button id="loadfrom">Load From</button>
+        <button id="FireFunction">Fire Function From</button>
+    </div>
+
+    <div id="OnclickEditor">
+        <p>Onclick Do</p>
+        <pre id = "onclicktextarea" contenteditable>
+            1. Type ur code in js
+            2. Choose sprite to save to
+            3. Choose sprite to load script from
+        </pre>
+
+        <button id="savetoclick">Save To</button>
+        <button id="loadfromclick">Load From</button>
+    </div>
+
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
