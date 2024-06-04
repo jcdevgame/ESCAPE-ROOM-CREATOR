@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Escape Room Builder</title>
+    <title>Escape Room Builder + UI NEEDS HELLPPPPP</title>
     <style>
   body {
     font-family: Arial, sans-serif;
@@ -72,12 +72,13 @@
     <div id="menu-bar">
         <button id="play">Play Test</button>
         <button id="stop">Stop Test</button>
-        <button id="save">Save</button>
-        <button id="import">Import</button>
         <button id="undoid">Undo</button>
         <button id="redoid">Redo</button>
         <button id="newblockid">Create Block</button>
         <button id="deleteblockid">Delete Block</button>
+        <button id="save">Save</button>    
+        <button id="load">Load</button>                                                                                                                                                              
+        <!--<input type="file" id="import" /> -->
         <!--
         <button>Insert Image</button>
         <button>Scale</button>
@@ -113,7 +114,18 @@
 
         <button id="saveto">Save To</button>
         <button id="loadfrom">Load From</button>
-        <button id="FireFunction">Fire Function From</button>
+    </div>
+
+    <div id="Editor">
+        <p>Forever Looped Script</p>
+        <pre id = "textareaforever" contenteditable>
+            1. Type ur code in js
+            2. Choose sprite to save to
+            3. Choose sprite to load script from
+        </pre>
+
+        <button id="savetoforever">Save To</button>
+        <button id="loadfromforever">Load From</button>
     </div>
 
     <div id="OnclickEditor">

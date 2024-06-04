@@ -11,36 +11,64 @@ document.getElementById("newblockid").addEventListener("click", newBlock);
 document.getElementById("deleteblockid").addEventListener("click", deleteBlock);
 
 let GameObjects = {};
+
 let blockCount = 0;
 let selectedBlock = null;
 
 let programStarted = false;
 
+const loadbutton = document.getElementById("load");
+
+const replace = document.getElementById("texttoreplace")
+
+loadbutton.addEventListener("click", function() {
+    fetch('SaveFile.json')
+
+    .then(res => res.json())
+
+    .then(data => {
+        console.log(data);
+        GameObjects = data;
+    });
+})
+
 /*
 classes and stuff 
 */
+
+function convertFunctionsToStrings(gameObjects) {
+    for (let key in gameObjects) {
+      let obj = gameObjects[key];
+      for (let prop in obj) {
+        if (typeof obj[prop] === 'function') {
+          obj[prop] = obj[prop].toString();
+        }
+      }
+    }
+}
   
-  // Create a function to trigger the download
-  function downloadJsonFile(data, filename) {
+// Create a function to trigger the download
+function downloadJsonFile(data, filename) {
     // Creating a blob object from the JSON data
     const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
   
     // Create a URL for the blob
     const url = URL.createObjectURL(blob);
   
-    // Create a new anchor element
+    // Create a new anchor element  
     const a = document.createElement('a');
     a.href = url;
     a.download = filename; 
     a.click();
   
     URL.revokeObjectURL(url);
-  }
+}
 
-  const savebutton = document.getElementById("save");
+const savebutton = document.getElementById("save");
 
- savebutton.addEventListener("click", function() {
+savebutton.addEventListener("click", function() {
     if (GameObjects) {
+        convertFunctionsToStrings(GameObjects);
         downloadJsonFile(GameObjects, 'SaveFile');
     } 
     else {
@@ -55,6 +83,7 @@ class Sprite {
     constructor(xPos, yPos, xSize, ySize, anchored, color, mass, animAvailable, imgID) {
         this.x = xPos; // X-coordinate of the sprite
         this.y = yPos; // Y-coordinate of the sprite
+
         this.width = xSize; // Width of the sprite
         this.height = ySize; // Height of the sprite
         this.anchored = anchored; // Whether physics apply (e.g., gravity)
@@ -73,9 +102,12 @@ class Sprite {
         this.jumping = false;
         this.inputManager = new InputManager();
 
+        this.hasonclick = false;
+
         this.clueManager;
 
         this.program = null;
+        this.foreverprogram = null;
         this.onclickprogram = null;
     }
 
@@ -246,8 +278,15 @@ class Sprite {
     
 }
 
+callForeverProgram() {
+    if (this.foreverprogram) {
+        this.foreverprogram(this); 
+    }
+}
 
     update() {
+        this.callForeverProgram();
+        
         if (!this.anchored) {
             if (this.jumping) {
                 this.yv += this.Gravity; // Gravity pulls down
@@ -327,7 +366,7 @@ class Sprite {
     }
 
     setProgram(func) {
-        this.program = func;
+    this.program = func;
     }
 }
 
@@ -339,6 +378,8 @@ class clueManager {
         this.notclicked = notclicked;
 
         this.rect = block
+
+        this.rect.hasonclick = true;
 
         console.log("Worked")
 
@@ -485,13 +526,51 @@ const makeClueButton = document.getElementById("left-panel").querySelector("butt
 
 const saveToButton = document.getElementById("saveto");
 const loadFromButton = document.getElementById("loadfrom");
-const FireFromButton = document.getElementById("FireFunction");
 
 const saveToButtonClick = document.getElementById("savetoclick");
 const loadFromButtonClick = document.getElementById("loadfromclick");
 
+const saveToButtonForever = document.getElementById("savetoforever");
+const loadFromButtonForever = document.getElementById("loadfromforever");
+
 const blockScriptTextEditor = document.getElementById("textarea");
 const blockScriptTextEditorClick = document.getElementById("onclicktextarea");
+const blockScriptTextEditorForever = document.getElementById("textareaforever");
+
+loadFromButtonForever.addEventListener("click", function() {
+    if (selectedBlock) {
+        console.log("Loaded", selectedBlock.name,"script");
+        if(selectedBlock.foreverprogram){
+            let toText = selectedBlock.foreverprogram.toString();
+            // Use a regular expression to remove the function definition
+            let innerCode = toText.replace(/^[^{]*{\s*/, '').replace(/\s*}[^}]*$/, '');
+            console.log("Code:",innerCode, "From",selectedBlock.name)
+            blockScriptTextEditorForever.innerText = innerCode;
+        }
+        else{
+            console.error("Cannot load NULL code, Code: 4");
+        }
+    } 
+    else {
+        console.error("Cant load from Null, Code: 2");
+    }
+});
+
+saveToButtonForever.addEventListener("click", function() {
+    if (selectedBlock) {
+        console.log("Saved to", selectedBlock.name);
+        
+        if(blockScriptTextEditorForever.innerText){    
+            selectedBlock.foreverprogram = new Function(blockScriptTextEditorForever.innerText);
+        }
+        else{
+            console.error("Text Area Blank, Cannot Save");
+        }
+    } 
+    else {
+        console.error("Cant save to Null, Code: 2");
+    }
+});
 
 loadFromButtonClick.addEventListener("click", function() {
     if (selectedBlock) {
@@ -557,6 +636,7 @@ saveToButton.addEventListener("click", function() {
     }
 });
 
+/*
 FireFromButton.addEventListener("click", function() {
     if (selectedBlock) {
         console.log("Firing", selectedBlock.name, "function");
@@ -566,6 +646,7 @@ FireFromButton.addEventListener("click", function() {
         console.error("Cant fire Null, Code: 3");
     }
 });
+*/
 
 loadFromButton.addEventListener("click", function() {
     if (selectedBlock) {
@@ -605,6 +686,7 @@ function gameLoop() {
             GameObjects[key].update();
         }
     }
+
     }
 
     for (let key of sortedKeys) {
@@ -631,6 +713,12 @@ startbutton.addEventListener("click", function() {
         let sprite = GameObjects[key];
         sprite.callProgram();
     }
+});
+
+stopbutton.addEventListener("click", function() {
+    console.log("Stopping...");
+
+    programStarted = false;
 });
 
 /*
