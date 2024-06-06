@@ -21,17 +21,6 @@ const loadbutton = document.getElementById("load");
 
 const replace = document.getElementById("texttoreplace")
 
-loadbutton.addEventListener("click", function() {
-    fetch('SaveFile.json')
-
-    .then(res => res.json())
-
-    .then(data => {
-        console.log(data);
-        GameObjects = data;
-    });
-})
-
 /*
 classes and stuff 
 */
@@ -77,7 +66,52 @@ savebutton.addEventListener("click", function() {
 });
   
   //downloadJsonFile(GameObjects, 'SaveFile');
-  
+  class clueManager {
+    constructor(canvas, ctx, block, onclick, notclicked){
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.onclick = onclick
+        this.notclicked = notclicked;
+
+        this.rect = block
+
+        this.rect.hasonclick = true;
+
+        console.log("Worked")
+
+        this.canvas.addEventListener('click', (evt) => {
+            this.MousePos = this.getMousePos(evt)
+
+            console.log(this.MousePos);
+
+            if (this.isInside(this.MousePos, this.rect)) {
+                console.log("clicked")
+
+                this.rect.callProgramOnclick();
+            } else {
+                console.log("clue not clicked")
+            }
+        }, false);
+    }
+
+    getMousePos(event) {
+        var rect = this.canvas.getBoundingClientRect();
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top,
+        };
+    }    
+    
+
+    isInside(pos, rect) {
+        // Adjust the mouse position by the amount the canvas is translated
+        const adjustedPos = {
+            x: pos.x,
+            y: pos.y
+        };
+        return adjustedPos.x > rect.x && adjustedPos.x < rect.x + rect.width && adjustedPos.y < rect.y + rect.height && adjustedPos.y > rect.y;
+    }
+}
 
 class Sprite {
     constructor(xPos, yPos, xSize, ySize, anchored, color, mass, animAvailable, imgID) {
@@ -125,14 +159,17 @@ class Sprite {
 
     movementDefault(){
 
-        if (this.inputManager.isKeyPressed("i")) {
-            this.y -= 10
+        if (this.inputManager.isKeyPressed("w")) {
+            this.y -= 1.5;
         }
-        if (this.inputManager.isKeyPressed("j")) {
-            this.x -= 3;
+        if (this.inputManager.isKeyPressed("a")) {
+            this.x -= 1.5;
         }
-        if (this.inputManager.isKeyPressed("l")) {
-            this.x += 3;
+        if (this.inputManager.isKeyPressed("d")) {
+            this.x += 1.5;
+        }
+        if (this.inputManager.isKeyPressed("s")) {
+            this.y += 1.5;
         }
     }
 
@@ -370,64 +407,66 @@ callForeverProgram() {
     }
 }
 
-class clueManager {
-    constructor(canvas, ctx, block, onclick, notclicked){
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.onclick = onclick
-        this.notclicked = notclicked;
-
-        this.rect = block
-
-        this.rect.hasonclick = true;
-
-        console.log("Worked")
-
-        this.canvas.addEventListener('click', (evt) => {
-            this.MousePos = this.getMousePos(evt)
-
-            console.log(this.MousePos);
-
-            if (this.isInside(this.MousePos, this.rect)) {
-                console.log("clicked")
-
-                this.rect.callProgramOnclick();
-            } else {
-                console.log("clue not clicked")
-            }
-        }, false);
-    }
-
-    getMousePos(event) {
-        var rect = this.canvas.getBoundingClientRect();
-        return {
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top,
-        };
-    }    
-    
-
-    isInside(pos, rect) {
-        // Adjust the mouse position by the amount the canvas is translated
-        const adjustedPos = {
-            x: pos.x,
-            y: pos.y
-        };
-        return adjustedPos.x > rect.x && adjustedPos.x < rect.x + rect.width && adjustedPos.y < rect.y + rect.height && adjustedPos.y > rect.y;
-    }
-}
 
 /*
 newblock func
 */
 
-function newBlock() {
+function newBlock(nameSPRT,SPRTx,SPRTy,SPRTwidth,SPRTheight,SPRTanchored, SPRTcolor, SPRTmass, SPRTflipHorizontally, SPRTflipVertically, SPRTGravity, SPRThasonclick, SPRTprogram, SPRTforeverprogram, SPRTonclickprogram, SPRTlayer) {
     blockCount++;
     let blockName = "block" + blockCount;
     const block = new Sprite(100, 100, 50, 50, true, "#050dff", 1, false);
     block.layer = blockCount; 
     block.name = blockName; 
     GameObjects[blockName] = block;
+
+    console.log(nameSPRT, "<- Should be NULL");
+
+    if (nameSPRT == true){
+        block.name = nameSPRT;
+        block.x = SPRTx;
+        block.y = SPRTy;
+        block.width = SPRTwidth;
+        block.height = SPRTheight;
+        block.anchored = SPRTanchored;
+        block.color = SPRTcolor;
+        block.mass = SPRTmass;
+        block.flipHorizontally = SPRTflipHorizontally;
+        block.flipVertically = SPRTflipVertically;
+        block.Gravity = SPRTGravity;
+        block.hasonclick = SPRThasonclick;
+
+        if(block.hasonclick == true){
+            const cluessss = new clueManager(canvas, canvas, block);
+        }
+
+        block.program = SPRTprogram;
+        block.foreverprogram = SPRTforeverprogram;
+        block.onclickprogram = SPRTonclickprogram;
+        block.layer = SPRTlayer;
+        
+        if (block.foreverprogram){
+            let toText = block.foreverprogram.toString();
+            let innerCode = toText.replace(/^[^{]*{\s*/, '').replace(/\s*}[^}]*$/, '');
+            block.foreverprogram = innerCode
+        }
+        else if (block.program){
+            let toText = block.program.toString();
+            let innerCode = toText.replace(/^[^{]*{\s*/, '').replace(/\s*}[^}]*$/, '');
+            block.program = innerCode
+        }
+        else if (block.onclickprogram){
+            let toText = block.onclickprogram.toString();
+            let innerCode = toText.replace(/^[^{]*{\s*/, '').replace(/\s*}[^}]*$/, '');
+            block.onclickprogram = innerCode
+        }
+
+        
+        block.foreverprogram = new Function(block.foreverprogram);
+        block.program = new Function(block.program);
+        block.onclickprogram = new Function(block.onclickprogram);
+        
+    }
 
     // Create a new button element
     const newButton = document.createElement("button");
@@ -701,6 +740,56 @@ function gameLoop() {
 /*
 Main Buttons Setup
 */
+
+var loadButton = document.getElementById('loadButton');
+var fileInput = document.getElementById('fileInput');
+
+loadButton.addEventListener('click', function() {
+    fileInput.click();
+});
+
+fileInput.addEventListener('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var data = JSON.parse(e.target.result);
+            console.log(data);
+
+            // Iterate over all objects in the data
+            for (var objectName in data) {
+                // Access the object
+                var object = data[objectName];
+
+                // Log the object name to the console
+                console.log('Object name:', objectName);
+
+                // Access and log all the properties of the object
+                console.log('x:', object.x);
+                console.log('y:', object.y);
+                console.log('width:', object.width);
+                console.log('height:', object.height);
+                console.log('anchored:', object.anchored);
+                console.log('color:', object.color);
+                console.log('mass:', object.mass);
+                console.log('flipHorizontally:', object.flipHorizontally);
+                console.log('flipVertically:', object.flipVertically);
+                console.log('Gravity:', object.Gravity);
+                console.log('hasonclick:', object.hasonclick);
+                console.log('program:', object.program);
+                console.log('foreverprogram:', object.foreverprogram);
+                console.log('onclickprogram:', object.onclickprogram);
+                console.log('layer:', object.layer);
+
+                newBlock(true, object.x, object.y, object.width, object.height, object.anchored, object.color, object.mass, object.flipHorizontally, object.flipVertically, object.Gravity, object.hasonclick, object.program, object.foreverprogram, object.onclickprogram, object.layer);
+            }
+        };
+        reader.readAsText(file);
+    }
+});
+
+
+
 
 startbutton.addEventListener("click", function() {
     console.log("Starting...");
