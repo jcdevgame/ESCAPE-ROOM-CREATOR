@@ -27,7 +27,7 @@ All of these different classes with their methods, properties, will become incre
 
 ### InputManager:
 #### Methods:
-- `isKeyPressed(key)` (Check if a key is pressed, it returns a true/false statement, so it can be used in an if statement: if (this.inputManager.isKeyPressed("w")
+- `isKeyPressed(key)` (Check if a key is pressed, it returns a true/false statement, so it can be used in an if statement: `if (this.inputManager.isKeyPressed("w")`
 
 ### AudioManager:
 #### Methods:
