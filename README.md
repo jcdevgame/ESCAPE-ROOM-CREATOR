@@ -14,7 +14,7 @@ One of the core features of Escape Room Creator are blocks.
 There are 2 different ways to make a sprite:
 - Pressing the `Create Block` button.
 - Loading a sprite from a `.json` file.
-#### Changing Properties of Blocks:
+##### Changing Properties of Blocks:
 To change the properties of your Block, you need to select it
 Changing the properties of your Blocks allows you to change the appearance and position. Some of the main properties that are crucial for your Escape Room is:
 - `x` X Coords for the block
@@ -22,12 +22,12 @@ Changing the properties of your Blocks allows you to change the appearance and p
 - `width` Your block's width
 - `height` Your block's height
 - `imgID` If you want your block to have a custom appearance (You can only get image urls.)
-#### Adding a Click Detector to your Block:
+##### Adding a Click Detector to your Block:
 In order to make youe `Onclick Script` to work, you need to add a click detector to your Block:
 1. Select your Block from the explorer
 2. Press Add Click Detector
 3. You should have a click detector now
-#### Deleting a Block
+##### Deleting a Block
 In order to remove a Block from your Escape Room:
 1. Select your Block from the explorer
 2. From the top bar, press Delete Block
@@ -35,17 +35,17 @@ In order to remove a Block from your Escape Room:
 
 ### Programing:
 You can program your blocks to have more customization over your blocks, allowing for a more advanced Escape Room.
-#### Script Types:
+##### Script Types:
 There are different types of scripts that have different functionalities:
 - `General Script` General script that fires once when `play` is pressed
 - `Forever Script` Forever script that runs 60FPS Max (depends on your browser). This is usually used for movements.
 - `Onclick Script` This script is only fired when the block is clicked (Can be used as clues for your escape room)
-#### Saving your Script to a Block:
+##### Saving your Script to a Block:
 In order to save your script to make sure it is fired, you need to know how to save your script to your block.
 1. When your finished with your script, go to explorer (Should be on the left)
 2. Find the block you want to save to (inside the explorer) and select it
 3. Once you selected it, below your script, press Save
-#### Loading your Script from a Block:
+##### Loading your Script from a Block:
 In order to retrieve your scripts from the block, you need to know how to load it from the block.
 1. Find the block you want to load from inside the explorer
 2. Select it
@@ -56,12 +56,12 @@ In order to retrieve your scripts from the block, you need to know how to load i
 
 ### Saving/Loading your Escape Rooms:
 In order to keep your progress, you need to know how to save and load.
-#### Saving your Escape Room:
+##### Saving your Escape Room:
 To save, you need to do the following:
 1. In the top bar, press save
 2. Once your press save, it will prompt you to download a `.json` file
 3. You have saved it
-#### Loading your Escape Room:
+##### Loading your Escape Room:
 In order to load youe Save File, do the following:
 1. In the top bar, press load
 2. Once you press load, it will prompt you to select your `.json` save file
