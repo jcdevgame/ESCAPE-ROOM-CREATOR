@@ -5,6 +5,13 @@ Escape Room Creator was a side project I did whenever I had free time. This is a
 - Program new sprites
 - Good way to learn programming
 
+## How to Use:
+This will provide a short tutorial on how to use it and the features it has.
+
+### Creating Sprites:
+There are 2 different ways to make a sprite:
+- Pressing
+
 ## Documentation:
 All of these different classes with their methods, properties, will become incredibly useful when you decide to program something using Escape Room Creator, and I will highly recommend doing that.
 
