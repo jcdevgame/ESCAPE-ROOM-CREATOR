@@ -15,12 +15,23 @@ There are 2 different ways to make a sprite:
 - Pressing the `Create Block` button.
 - Loading a sprite from a `.json` file.
 #### Changing Properties of Blocks:
+To change the properties of your Block, you need to select it
 Changing the properties of your Blocks allows you to change the appearance and position. Some of the main properties that are crucial for your Escape Room is:
 - `x` X Coords for the block
 - `y` Y Coords for the block
 - `width` Your block's width
 - `height` Your block's height
 - `imgID` If you want your block to have a custom appearance (You can only get image urls.)
+#### Adding a Click Detector to your Block:
+In order to make youe `Onclick Script` to work, you need to add a click detector to your Block:
+1. Select your Block from the explorer
+2. Press Add Click Detector
+3. You should have a click detector now
+#### Deleting a Block
+In order to remove a Block from your Escape Room:
+1. Select your Block from the explorer
+2. From the top bar, press Delete Block
+3. Your Block should be Deleted
 
 ### Programing:
 You can program your blocks to have more customization over your blocks, allowing for a more advanced Escape Room.
@@ -51,7 +62,10 @@ To save, you need to do the following:
 2. Once your press save, it will prompt you to download a `.json` file
 3. You have saved it
 #### Loading your Escape Room:
-1. 
+In order to load youe Save File, do the following:
+1. In the top bar, press load
+2. Once you press load, it will prompt you to select your `.json` save file
+3. You have successfully loaded your save file
 
 ## Documentation:
 All of these different classes with their methods, properties, will become incredibly useful when you decide to program something using Escape Room Creator, and I will highly recommend doing that.
