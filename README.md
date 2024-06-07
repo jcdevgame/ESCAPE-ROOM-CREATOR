@@ -6,7 +6,7 @@ Escape Room Creator was a side project I did whenever I had free time. This is a
 - Good way to learn programming
 
 ## How to Use:
-This will provide a short tutorial on how to use it and the features it has.
+This will provide a short tutorial on how to use Escape Room Creator and the features it has.
 
 ### Blocks:
 One of the core features of Escape Room Creator are blocks.
