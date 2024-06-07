@@ -112,5 +112,5 @@ All of these different classes with their methods, properties, will become incre
 - `setFrame(frameIndex)` Set Frame
 
 ## Future Additions:
-- Ability to Export your game as a .zip file
+- Ability to Export your game as a .zip file (so that you can play your game on other sites other than the escape room creator)
 - File explorer so you can have a proper way to store the images locally
