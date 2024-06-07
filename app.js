@@ -412,7 +412,7 @@ callForeverProgram() {
 newblock func
 */
 
-function newBlock(nameSPRT,SPRTx,SPRTy,SPRTwidth,SPRTheight,SPRTanchored, SPRTcolor, SPRTmass, SPRTflipHorizontally, SPRTflipVertically, SPRTGravity, SPRThasonclick, SPRTprogram, SPRTforeverprogram, SPRTonclickprogram, SPRTlayer) {
+function newBlock(nameSPRT,SPRTx,SPRTy,SPRTwidth,SPRTheight,SPRTanchored, SPRTcolor, SPRTmass, SPRTflipHorizontally, SPRTflipVertically, SPRTGravity, SPRThasonclick, SPRTprogram, SPRTforeverprogram, SPRTonclickprogram, SPRTlayer, SPRTname) {
     blockCount++;
     let blockName = "block" + blockCount;
     const block = new Sprite(100, 100, 50, 50, true, "#050dff", 1, false);
@@ -473,6 +473,10 @@ function newBlock(nameSPRT,SPRTx,SPRTy,SPRTwidth,SPRTheight,SPRTanchored, SPRTco
     newButton.id = blockName;
     block.button = newButton;
     
+    if (nameSPRT == true){
+        blockName = SPRTname;
+    }
+
     newButton.innerHTML = blockName;
    
     document.getElementById("explorer").appendChild(newButton);
@@ -496,7 +500,6 @@ function newBlock(nameSPRT,SPRTx,SPRTy,SPRTwidth,SPRTheight,SPRTanchored, SPRTco
                 
                 propertyInput.addEventListener("change", function() {
                     if (property === "name") {
-                        
                         const newName = propertyInput.value;
                        
                         GameObjects[newName] = GameObjects[blockName];
@@ -505,6 +508,7 @@ function newBlock(nameSPRT,SPRTx,SPRTy,SPRTwidth,SPRTheight,SPRTanchored, SPRTco
                         newButton.innerHTML = newName;
                         
                         blockName = newName;
+
                     } else if (property === "layer") {
                         
                         const newLayer = parseInt(propertyInput.value, 10);
@@ -781,7 +785,7 @@ fileInput.addEventListener('change', function(event) {
                 console.log('onclickprogram:', object.onclickprogram);
                 console.log('layer:', object.layer);
 
-                newBlock(true, object.x, object.y, object.width, object.height, object.anchored, object.color, object.mass, object.flipHorizontally, object.flipVertically, object.Gravity, object.hasonclick, object.program, object.foreverprogram, object.onclickprogram, object.layer);
+                newBlock(true, object.x, object.y, object.width, object.height, object.anchored, object.color, object.mass, object.flipHorizontally, object.flipVertically, object.Gravity, object.hasonclick, object.program, object.foreverprogram, object.onclickprogram, object.layer, objectName);
             }
         };
         reader.readAsText(file);
