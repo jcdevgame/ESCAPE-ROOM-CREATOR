@@ -10,7 +10,7 @@ This will provide a short tutorial on how to use Escape Room Creator and the fea
 
 ### Blocks:
 One of the core features of Escape Room Creator are blocks.
-#### Create Blocks:
+##### Create Blocks:
 There are 2 different ways to make a sprite:
 - Pressing the `Create Block` button.
 - Loading a sprite from a `.json` file.
