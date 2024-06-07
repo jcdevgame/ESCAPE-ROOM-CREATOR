@@ -48,3 +48,7 @@ All of these different classes with their methods, properties, will become incre
 - `playOnSprite(targetSprite)` Play on a sprite
 - `stop()` Stop anim
 - `setFrame(frameIndex)` Set Frame
+
+## Future Additions:
+- Ability to Export your game as a .zip file
+- File explorer so you can have a proper way to store the images locally
