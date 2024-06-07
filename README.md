@@ -8,9 +8,50 @@ Escape Room Creator was a side project I did whenever I had free time. This is a
 ## How to Use:
 This will provide a short tutorial on how to use it and the features it has.
 
-### Creating Sprites:
+### Blocks:
+One of the core features of Escape Room Creator are blocks.
+#### Create Blocks:
 There are 2 different ways to make a sprite:
-- Pressing
+- Pressing the `Create Block` button.
+- Loading a sprite from a `.json` file.
+#### Changing Properties of Blocks:
+Changing the properties of your Blocks allows you to change the appearance and position. Some of the main properties that are crucial for your Escape Room is:
+- `x` X Coords for the block
+- `y` Y Coords for the block
+- `width` Your block's width
+- `height` Your block's height
+- `imgID` If you want your block to have a custom appearance (You can only get image urls.)
+
+### Programing:
+You can program your blocks to have more customization over your blocks, allowing for a more advanced Escape Room.
+#### Script Types:
+There are different types of scripts that have different functionalities:
+- `General Script` General script that fires once when `play` is pressed
+- `Forever Script` Forever script that runs 60FPS Max (depends on your browser). This is usually used for movements.
+- `Onclick Script` This script is only fired when the block is clicked (Can be used as clues for your escape room)
+#### Saving your Script to a Block:
+In order to save your script to make sure it is fired, you need to know how to save your script to your block.
+1. When your finished with your script, go to explorer (Should be on the left)
+2. Find the block you want to save to (inside the explorer) and select it
+3. Once you selected it, below your script, press Save
+#### Loading your Script from a Block:
+In order to retrieve your scripts from the block, you need to know how to load it from the block.
+1. Find the block you want to load from inside the explorer
+2. Select it
+3. Once you selected it, find the specific script type in the script editors below
+4. In your selected script type script editor, press load.
+5. The script with that code should be loaded into the editor.
+6. (MAKE SURE YOU SAVED THE CODE TO YOUR SPRITE BEFORE LOADING ANOTHER SCRIPT)
+
+### Saving/Loading your Escape Rooms:
+In order to keep your progress, you need to know how to save and load.
+#### Saving your Escape Room:
+To save, you need to do the following:
+1. In the top bar, press save
+2. Once your press save, it will prompt you to download a `.json` file
+3. You have saved it
+#### Loading your Escape Room:
+1. 
 
 ## Documentation:
 All of these different classes with their methods, properties, will become incredibly useful when you decide to program something using Escape Room Creator, and I will highly recommend doing that.
