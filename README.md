@@ -83,7 +83,8 @@ All of these different classes with their methods, properties, will become incre
 - `flipHorizontally`
 - `flipVertically`
 #### Methods:
-- `findObjectByName(classNameToFind)` (Used to find and gives the ability to change the properties of another sprite)
+- (To program something and change properties of the sprite that your programming into, make sure to use `this`. E.g: `this.x`
+- `findObjectByName(classNameToFind)` (Used to find and gives the ability to change the properties of another sprite). E.G: `let lol = this.findObjectByName('block2'); lol.x += 5`
 - `movementDefault()`
 - `update()`
 
